@@ -10,36 +10,36 @@
 
 //const std::array<int, 3> array_sizes = {10, 100, 1000};
 const std::array<int, 7> array_sizes = {10, 100, 1000, 10000, 100000, 1000000, 10000000};
-#define ARRAY_NUMBER_OF_SIZES array_sizes.size()
+#define ARRAY_NUMBER_OF_SIZES 7
 
 const std::array<std::string, 5> algorithm_names = {"Bubble Sort", "Insertion Sort", "Selection Sort", "Merge Sort", "Quick Sort"};
-#define NUMBER_OF_ALGORITHMS algorithm_names.size()
+#define NUMBER_OF_ALGORITHMS 5
 
 const std::array<std::string, 3> generation_names = {"Random", "Ordered", "Reverse"};
-#define NUMBER_OF_ORDERINGS generation_names.size()
+#define NUMBER_OF_ORDERINGS 3
 
 #define ARRAY_SAMPLE_SIZE 10
 
-void generate_random_array(const int size, std::vector<int>& v) {
-    for (int i = 0; i < size; i++) {
+void generate_random_array(const size_t size, std::vector<int>& v) {
+    for (size_t i = 0; i < size; i++) {
         v.push_back(rand() % size);
     }
 }
 
-void generate_ordered_array(const int size, std::vector<int>& v) {
-    for (int i = 0; i < size; i++) {
+void generate_ordered_array(const size_t size, std::vector<int>& v) {
+    for (size_t i = 0; i < size; i++) {
         v.push_back(i);
     }
 }
 
-void generate_reverse_array(const int size, std::vector<int>& v) {
-    for (int i = size; i > 0; i--) {
+void generate_reverse_array(const size_t size, std::vector<int>& v) {
+    for (size_t i = size; i > 0; i--) {
         v.push_back(i);
     }
 }
 
 int verify_sorted(const std::vector<int>& v) {
-    for (int i = 0; i < v.size() - 1; i++) {
+    for (size_t i = 0; i < v.size() - 1; i++) {
         if (v[i] > v[i + 1]) {
             return 0;
         }
@@ -59,7 +59,7 @@ int main(void) {
     void (*sorting_functions[NUMBER_OF_ALGORITHMS])(std::vector<int>&) = {
         bubble_sort, insertion_sort, selection_sort, merge_sort, quick_sort};
     // array of generating data functions
-    void (*generating_functions[3])(const int, std::vector<int>&) = {
+    void (*generating_functions[3])(const size_t, std::vector<int>&) = {
         generate_random_array, generate_ordered_array, generate_reverse_array};
 
 
