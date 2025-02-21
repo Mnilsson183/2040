@@ -1,15 +1,19 @@
-#include "sort.hpp"
+// COPYRIGHT 2025 MORGAN NILSSON ALL RIGHTS RESERVED
 
 #include <chrono>
 #include <iostream>
 
 #include <array>
+#include <vector>
+#include <string>
+
+#include "sort.hpp"
 
 #define DEBUG 1
 #define VERIFY 1
 
 //const std::array<int, 3> array_sizes = {10, 100, 1000};
-const std::array<int, 7> array_sizes = {10, 100, 1000, 10000, 100000, 1000000, 10000000};
+const std::array<size_t, 7> array_sizes = {10, 100, 1000, 10000, 100000, 1000000, 10000000};
 #define ARRAY_NUMBER_OF_SIZES 7
 
 const std::array<std::string, 5> algorithm_names = {"Bubble Sort", "Insertion Sort", "Selection Sort", "Merge Sort", "Quick Sort"};
@@ -20,25 +24,25 @@ const std::array<std::string, 3> generation_names = {"Random", "Ordered", "Rever
 
 #define ARRAY_SAMPLE_SIZE 10
 
-void generate_random_array(const size_t size, std::vector<int>& v) {
+void generate_random_array(const size_t size, std::vector<int64_t>& v) {
     for (size_t i = 0; i < size; i++) {
         v.push_back(rand() % size);
     }
 }
 
-void generate_ordered_array(const size_t size, std::vector<int>& v) {
+void generate_ordered_array(const size_t size, std::vector<int64_t>& v) {
     for (size_t i = 0; i < size; i++) {
         v.push_back(i);
     }
 }
 
-void generate_reverse_array(const size_t size, std::vector<int>& v) {
+void generate_reverse_array(const size_t size, std::vector<int64_t>& v) {
     for (size_t i = size; i > 0; i--) {
         v.push_back(i);
     }
 }
 
-int verify_sorted(const std::vector<int>& v) {
+int verify_sorted(const std::vector<int64_t>& v) {
     for (size_t i = 0; i < v.size() - 1; i++) {
         if (v[i] > v[i + 1]) {
             return 0;
@@ -52,19 +56,19 @@ int main(void) {
     std::array<std::array<std::array<std::array<std::chrono::milliseconds, ARRAY_SAMPLE_SIZE>, 
         NUMBER_OF_ORDERINGS>, ARRAY_NUMBER_OF_SIZES>, NUMBER_OF_ALGORITHMS> elapsed_times;
 
-    std::vector<int> src_arrays[ARRAY_SAMPLE_SIZE];
-    std::vector<int> arrays[ARRAY_SAMPLE_SIZE];
+    std::array<std::vector<int64_t>, ARRAY_SAMPLE_SIZE> src_arrays;
+    std::array<std::vector<int64_t>, ARRAY_SAMPLE_SIZE> arrays;
 
     // array of the sorting functions
-    void (*sorting_functions[NUMBER_OF_ALGORITHMS])(std::vector<int>&) = {
-        bubble_sort, insertion_sort, selection_sort, merge_sort, quick_sort};
+    std::array<void(*)(std::vector<int64_t>&), NUMBER_OF_ALGORITHMS> sorting_functions = {
+        Sort::bubble_sort, Sort::insertion_sort, Sort::selection_sort, Sort::merge_sort, Sort::quick_sort};
     // array of generating data functions
-    void (*generating_functions[3])(const size_t, std::vector<int>&) = {
+    std::array<void(*)(const size_t, std::vector<int64_t>&), NUMBER_OF_ORDERINGS> generating_functions = {
         generate_random_array, generate_ordered_array, generate_reverse_array};
 
 
     for (int arr_size = 0; arr_size < ARRAY_NUMBER_OF_SIZES; arr_size++) {
-        int size = array_sizes[arr_size];
+        size_t size = array_sizes[arr_size];
 
         #if DEBUG
         std::cout << "Array size: " << size << std::endl;
@@ -83,23 +87,38 @@ int main(void) {
 
                 for (int algorithm = 0; algorithm < NUMBER_OF_ALGORITHMS; algorithm++) {
                     #if DEBUG
-                    std::cout << "Algorithm: " << algorithm_names[algorithm] << std::endl << std::endl;
+                    std::cout << "Numbers size " << src_arrays[sample].size() << " Ordering type: " << generation_names[ordering] << " sample: " << sample << " algorithm: " << algorithm_names[algorithm];
+                    std::flush(std::cout);
                     #endif
                     // if using selection insertion or bubble and array > 100 000 skip
-                    if (algorithm < 3 && size > array_sizes[1]) {
+                    if (algorithm < 3 && size > array_sizes[0]) {
                         elapsed_times[algorithm][arr_size][ordering][sample] = std::chrono::milliseconds(-1);
+                        #if DEBUG
+                        std::cout << " skipped" << std::endl;
+                        #endif
                         continue;
                     }
-                    //if using merge or quick and array < 100 000 skip
-                    //if (algorithm >= 3 && size < array_sizes[1]) {
-                    //    elapsed_times[algorithm][arr_size][ordering][sample] = std::chrono::milliseconds(-1);
-                    //    continue;
-                    //}
+                    // if using merge or quick and array < 100 000 skip
+                    if (algorithm >= 3 && size < array_sizes[1]) {
+                        elapsed_times[algorithm][arr_size][ordering][sample] = std::chrono::milliseconds(-1);
+                        #if DEBUG
+                        std::cout << " skipped" << std::endl;
+                        #endif
+                        continue;
+                    }
 
-                    if (algorithm)
+                    // if quicksort and is reverse or ordered skip
+                    if (algorithm == 4 && ordering != 0) {
+                        elapsed_times[algorithm][arr_size][ordering][sample] = std::chrono::milliseconds(-1);
+                        #if DEBUG
+                        std::cout << " skipped" << std::endl;
+                        #endif
+                        continue;
+                    }
+
                     // deep copy the array
                     arrays[sample].clear();
-                    for (int i = 0; i < size; i++) {
+                    for (uint64_t i = 0; i < size; i++) {
                         arrays[sample].push_back(src_arrays[sample][i]);
                     }
 
@@ -113,6 +132,10 @@ int main(void) {
                     if (!verify_sorted(arrays[sample])) {
                         std::cout << "Array not sorted! " << algorithm_names[algorithm] << std::endl;
                     }
+                    #endif
+
+                    #if DEBUG
+                    std::cout << " done" << std::endl;
                     #endif
                 }
 
