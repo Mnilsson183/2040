@@ -10,10 +10,10 @@ CPPLINT_FLAGS=--linelength=120 --filter=-whitespace/line_length,-whitespace/comm
 all: $(BUILD_DIR)/main.o $(BUILD_DIR)/sort.o
 	$(CC) $^ -o $(BUILD_DIR)/main
 
-$(BUILD_DIR)/main.o: $(SRC_DIR)/main.cpp $(BUILD_DIR) check
+$(BUILD_DIR)/main.o: $(SRC_DIR)/main.cpp $(BUILD_DIR)
 	$(CC) $(CC_FLAGS) -c $(SRC_DIR)/main.cpp -o $(BUILD_DIR)/main.o
 
-$(BUILD_DIR)/sort.o: $(SRC_DIR)/sort.cpp $(SRC_DIR)/sort.h $(BUILD_DIR) check
+$(BUILD_DIR)/sort.o: $(SRC_DIR)/sort.cpp $(BUILD_DIR)
 	$(CC) $(CC_FLAGS) -c $(SRC_DIR)/sort.cpp -o $(BUILD_DIR)/sort.o
 
 $(BUILD_DIR):

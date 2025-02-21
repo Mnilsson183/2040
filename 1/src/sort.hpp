@@ -13,9 +13,9 @@ class Sort {
         static void merge_sort(std::vector<int64_t>& A);
         static void quick_sort(std::vector<int64_t>& A);
     private:
-        static void private_quick_sort(std::vector<int64_t>& A, const unsigned int low, const unsigned int high);
-        static unsigned int HoarePartition(std::vector<int64_t>& A, const unsigned int low, const unsigned int high);
-        static void merge(std::vector<int64_t>& B, std::vector<int64_t>& C, std::vector<int64_t>& A);
+        static void private_quick_sort(std::vector<int64_t>& A, const size_t low, const size_t high);
+        static size_t HoarePartition(std::vector<int64_t>& A, const size_t low, const size_t high);
+        static void merge(const std::vector<int64_t>& B, const std::vector<int64_t>& C, std::vector<int64_t>& A);
 };
 
 #endif
