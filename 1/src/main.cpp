@@ -5,11 +5,11 @@
 
 #include <array>
 
-#define DEBUG 1
-#define VERIFY 1
+#define DEBUG 0
+#define VERIFY 0
 
-//const std::array<int, 5> array_sizes = {10, 100, 1000, 10000, 100000};
-const std::array<int, 4> array_sizes = {10, 100, 1000, 10000};
+const std::array<int, 3> array_sizes = {10, 100, 1000};
+//const std::array<int, 7> array_sizes = {10, 100, 1000, 10000, 100000, 1000000, 10000000};
 #define ARRAY_NUMBER_OF_SIZES array_sizes.size()
 
 const std::array<std::string, 5> algorithm_names = {"Bubble Sort", "Insertion Sort", "Selection Sort", "Merge Sort", "Quick Sort"};
@@ -79,6 +79,18 @@ int main(void) {
             for (int sample = 0; sample < ARRAY_SAMPLE_SIZE; sample++) {
 
                 for (int algorithm = 0; algorithm < NUMBER_OF_ALGORITHMS; algorithm++) {
+                    // if using selection insertion or bubble and array > 100 000 skip
+                    if (algorithm < 3 && size > 100000) {
+                        elapsed_times[algorithm][arr_size][ordering][sample] = std::chrono::milliseconds(-1);
+                        continue;
+                    }
+                    // if using merge or quick and array < 100 000 skip
+                    if (algorithm >= 3 && size < 100000) {
+                        elapsed_times[algorithm][arr_size][ordering][sample] = std::chrono::milliseconds(-1);
+                        continue;
+                    }
+
+                    if (algorithm)
                     // deep copy the array
                     arrays[sample].clear();
                     for (int i = 0; i < size; i++) {
@@ -111,15 +123,73 @@ int main(void) {
             for (int ordering = 0; ordering < NUMBER_OF_ORDERINGS; ordering++) {
                 std::cout << generation_names[ordering] << ": ";
                 for (int sample = 0; sample < ARRAY_SAMPLE_SIZE; sample++) {
-                    std::cout << elapsed_times[algorithm][arr_size][ordering][sample].count() << "ms";
-                    if (sample != ARRAY_SAMPLE_SIZE - 1) {
-                        std::cout << ", ";
+                    if (elapsed_times[algorithm][arr_size][ordering][sample].count() == -1) {
+                        std::cout << "N/A";
+                        if (sample != ARRAY_SAMPLE_SIZE - 1) {
+                            std::cout << ", ";
+                        }
+                    } else {
+                        std::cout << elapsed_times[algorithm][arr_size][ordering][sample].count() << "ms";
+                        if (sample != ARRAY_SAMPLE_SIZE - 1) {
+                            std::cout << ", ";
+                        }
                     }
                 }
                 std::cout << std::endl;
             }
             std::cout << std::endl;
         }
+    }
+
+    // print best times for each time highlight the best of each group
+    for (int arr_size = 0; arr_size < ARRAY_NUMBER_OF_SIZES; arr_size++) {
+        std::cout << "Array size: " << array_sizes[arr_size] << std::endl;
+        for (int ordering = 0; ordering < NUMBER_OF_ORDERINGS; ordering++) {
+            std::cout << "  " << generation_names[ordering] << ": ";
+
+            std::chrono::milliseconds best_times[NUMBER_OF_ALGORITHMS];
+
+            for (int sample = 0; sample < ARRAY_SAMPLE_SIZE; sample++) {
+                for (int algorithm = 0; algorithm < NUMBER_OF_ALGORITHMS; algorithm++) {
+                    if (sample == 0 || elapsed_times[algorithm][arr_size][ordering][sample] < best_times[algorithm]) {
+                        best_times[algorithm] = elapsed_times[algorithm][arr_size][ordering][sample];
+                    }
+                }
+            }
+
+
+            for (int algorithm = 0; algorithm < NUMBER_OF_ALGORITHMS; algorithm++) {
+                // calculate the min time of the best times
+                std::chrono::milliseconds min_time = best_times[0];
+                for (int i = 1; i < NUMBER_OF_ALGORITHMS; i++) {
+                    if (best_times[i] < min_time && best_times[i].count() != -1) {
+                        min_time = best_times[i];
+                    }
+                }
+
+                if (best_times[algorithm].count() == -1) {
+                    std::cout << "N/A";
+                    if (algorithm != NUMBER_OF_ALGORITHMS - 1) {
+                        std::cout << ", ";
+                    }
+                } else {
+                    // print best time in red
+                    if (best_times[algorithm] == min_time) {
+                        std::cout << "\033[1;31m";
+                    }
+                    std::cout << best_times[algorithm].count() << "ms";
+
+                    if (algorithm != NUMBER_OF_ALGORITHMS - 1) {
+                        std::cout << ", ";
+                    }
+
+                    // clear color
+                    std::cout << "\033[0m";
+                }
+            }
+            std::cout << std::endl;
+        }
+        std::cout << std::endl;
     }
 
     return 0;
