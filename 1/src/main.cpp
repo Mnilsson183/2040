@@ -5,8 +5,8 @@
 
 #include <array>
 
-#define DEBUG 0
-#define VERIFY 0
+#define DEBUG 1
+#define VERIFY 1
 
 //const std::array<int, 3> array_sizes = {10, 100, 1000};
 const std::array<int, 7> array_sizes = {10, 100, 1000, 10000, 100000, 1000000, 10000000};
@@ -49,15 +49,18 @@ int verify_sorted(const std::vector<int>& v) {
 
 int main(void) {
 
-    std::chrono::milliseconds elapsed_times[NUMBER_OF_ALGORITHMS][ARRAY_NUMBER_OF_SIZES][NUMBER_OF_ORDERINGS][ARRAY_SAMPLE_SIZE];
+    std::array<std::array<std::array<std::array<std::chrono::milliseconds, ARRAY_SAMPLE_SIZE>, 
+        NUMBER_OF_ORDERINGS>, ARRAY_NUMBER_OF_SIZES>, NUMBER_OF_ALGORITHMS> elapsed_times;
 
     std::vector<int> src_arrays[ARRAY_SAMPLE_SIZE];
     std::vector<int> arrays[ARRAY_SAMPLE_SIZE];
 
     // array of the sorting functions
-    void (*sorting_functions[NUMBER_OF_ALGORITHMS])(std::vector<int>&) = {bubble_sort, insertion_sort, selection_sort, merge_sort, quick_sort};
+    void (*sorting_functions[NUMBER_OF_ALGORITHMS])(std::vector<int>&) = {
+        bubble_sort, insertion_sort, selection_sort, merge_sort, quick_sort};
     // array of generating data functions
-    void (*generating_functions[3])(const int, std::vector<int>&) = {generate_random_array, generate_ordered_array, generate_reverse_array};
+    void (*generating_functions[3])(const int, std::vector<int>&) = {
+        generate_random_array, generate_ordered_array, generate_reverse_array};
 
 
     for (int arr_size = 0; arr_size < ARRAY_NUMBER_OF_SIZES; arr_size++) {
@@ -79,16 +82,19 @@ int main(void) {
             for (int sample = 0; sample < ARRAY_SAMPLE_SIZE; sample++) {
 
                 for (int algorithm = 0; algorithm < NUMBER_OF_ALGORITHMS; algorithm++) {
+                    #if DEBUG
+                    std::cout << "Algorithm: " << algorithm_names[algorithm] << std::endl << std::endl;
+                    #endif
                     // if using selection insertion or bubble and array > 100 000 skip
-                    if (algorithm < 3 && size > 100000) {
+                    if (algorithm < 3 && size > array_sizes[1]) {
                         elapsed_times[algorithm][arr_size][ordering][sample] = std::chrono::milliseconds(-1);
                         continue;
                     }
-                    // if using merge or quick and array < 100 000 skip
-                    if (algorithm >= 3 && size < 100000) {
-                        elapsed_times[algorithm][arr_size][ordering][sample] = std::chrono::milliseconds(-1);
-                        continue;
-                    }
+                    //if using merge or quick and array < 100 000 skip
+                    //if (algorithm >= 3 && size < array_sizes[1]) {
+                    //    elapsed_times[algorithm][arr_size][ordering][sample] = std::chrono::milliseconds(-1);
+                    //    continue;
+                    //}
 
                     if (algorithm)
                     // deep copy the array
