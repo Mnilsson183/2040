@@ -8,8 +8,8 @@
 #define DEBUG 0
 #define VERIFY 0
 
-const std::array<int, 3> array_sizes = {10, 100, 1000};
-//const std::array<int, 7> array_sizes = {10, 100, 1000, 10000, 100000, 1000000, 10000000};
+//const std::array<int, 3> array_sizes = {10, 100, 1000};
+const std::array<int, 7> array_sizes = {10, 100, 1000, 10000, 100000, 1000000, 10000000};
 #define ARRAY_NUMBER_OF_SIZES array_sizes.size()
 
 const std::array<std::string, 5> algorithm_names = {"Bubble Sort", "Insertion Sort", "Selection Sort", "Merge Sort", "Quick Sort"};
