@@ -7,6 +7,11 @@
 
 #include "sort.hpp"
 
+/**
+ * @brief Sorts a vector of integers using the bubble sort algorithm.
+ * 
+ * @param A A reference to the vector of integers to be sorted.
+ */
 void Sort::bubble_sort(std::vector<int64_t>& A) {
 
     const size_t size = A.size();
@@ -25,6 +30,11 @@ void Sort::bubble_sort(std::vector<int64_t>& A) {
     }
 }
 
+/**
+ * @brief Sorts a vector of integers using the insertion sort algorithm.
+ * 
+ * @param A A reference to the vector of integers to be sorted.
+ */
 void Sort::insertion_sort(std::vector<int64_t>& A) {
 
     const size_t n = A.size() + 1;
@@ -41,12 +51,18 @@ void Sort::insertion_sort(std::vector<int64_t>& A) {
             --j;
 
         }
+
         A[j + 1] = v;
 
     }
 
 }
 
+/**
+ * @brief Sorts a vector of integers using the selection sort algorithm.
+ * 
+ * @param A A reference to the vector of integers to be sorted.
+ */
 void Sort::selection_sort(std::vector<int64_t>& A) {
 
     const size_t n = A.size() + 1;
@@ -59,6 +75,7 @@ void Sort::selection_sort(std::vector<int64_t>& A) {
 
             if (A[j] < A[min]) min = j;
         }
+
         std::swap(A[i], A[min]);
 
     }
@@ -80,11 +97,10 @@ void Sort::merge(const std::vector<int64_t>& B, const std::vector<int64_t>& C, s
 
     while(i < p && j < q) {
 
-        if (B[i] <= C[j])
-            A[k++] = B[i++];
+        if (B[i] <= C[j]) A[k++] = B[i++];
 
-        else
-            A[k++] = C[j++];
+        else A[k++] = C[j++];
+
     }
 
     if (i == p) {
@@ -107,7 +123,13 @@ void Sort::merge(const std::vector<int64_t>& B, const std::vector<int64_t>& C, s
 
 }
 
+/**
+ * @brief Sorts a vector of integers using the merge sort algorithm.
+ * 
+ * @param A A reference to the vector of integers to be sorted.
+ */
 void Sort::merge_sort(std::vector<int64_t>& A) {
+
     size_t n = A.size();
 
     if (n > 1) {
@@ -116,15 +138,16 @@ void Sort::merge_sort(std::vector<int64_t>& A) {
         std::vector<int64_t> C;
 
         for (size_t i = 0; i < n / 2; i++) {
-            B.push_back(A.at(i));
+            B.push_back(A[i]);
         }
 
         for (size_t i = n / 2; i < n; i++) {
-            C.push_back(A.at(i));
+            C.push_back(A[i]);
         }
 
         merge_sort(B);
         merge_sort(C);
+
         merge(B, C, A);
 
     }
@@ -133,15 +156,22 @@ void Sort::merge_sort(std::vector<int64_t>& A) {
     
 }
 
-size_t median_of_three(std::vector<int64_t>& A, size_t low, size_t high) {
+size_t Sort::median_of_three(std::vector<int64_t>& A, size_t low, size_t high) {
+
     size_t mid = low + (high - low) / 2;
+
     if (A[low] > A[mid]) std::swap(A[low], A[mid]);
+
     if (A[low] > A[high]) std::swap(A[low], A[high]);
+
     if (A[mid] > A[high]) std::swap(A[mid], A[high]);
+
     return mid;
+
 }
 
 size_t Sort::HoarePartition(std::vector<int64_t>& A, const size_t low, const size_t high) {
+
     const int64_t p = A.at(median_of_three(A, low, high));
     size_t i = low - 1;
     size_t j = high + 1;
@@ -150,24 +180,19 @@ size_t Sort::HoarePartition(std::vector<int64_t>& A, const size_t low, const siz
 
         do {
             ++i;
-        } while(A[i] < p && i < high);
+        } while(A[i] < p);
 
         do {
             --j;
-        } while(A[j] > p && j > low);
+        } while(A[j] > p);
 
         if (i >= j) return j;
 
-        //std::cout << "i: " << i << " j: " << j << std::endl;
-
-        std::swap(A.at(i), A.at(j));
-
-        //std::cout << "SAFE" << std::endl;
+        std::swap(A[i], A[j]);
     
     }
 
 }
-
 
 void Sort::private_quick_sort(std::vector<int64_t>& A, const size_t low, const size_t high) {
 
@@ -176,11 +201,89 @@ void Sort::private_quick_sort(std::vector<int64_t>& A, const size_t low, const s
         const size_t s = HoarePartition(A, low, high);
         private_quick_sort(A, low, s);
         private_quick_sort(A, s + 1, high);
+
     }
 }
 
 
+/**
+ * @brief Sorts a vector of integers using the Quick Sort algorithm.
+ * 
+ * @param A A reference to a vector of int64_t integers to be sorted.
+ */
 void Sort::quick_sort(std::vector<int64_t>& A) {
 
     private_quick_sort(A, 0, A.size() - 1);
+
+}
+
+
+/**
+ * @brief Generates a random array of integers.
+ * 
+ * @param size The number of random integers to generate.
+ * @param v The vector to be filled with random integers.
+ */
+void Sort::generate_random_array(const size_t size, std::vector<int64_t>& v) {
+
+    for (size_t i = 0; i < size; i++) {
+
+        v.push_back(rand() % size);
+
+    }
+
+}
+
+/**
+ * @brief Generates an ordered array of integers.
+ * 
+ * @param size The number of elements to generate.
+ * @param v The vector to be filled with ordered integers.
+ */
+void Sort::generate_ordered_array(const size_t size, std::vector<int64_t>& v) {
+
+    for (size_t i = 0; i < size; i++) {
+
+        v.push_back(i);
+
+    }
+
+}
+
+/**
+ * @brief Generates a reverse sorted array of integers.
+ * 
+ * @param size The number of elements to generate in the array.
+ * @param v The vector to be filled with reverse ordered integers.
+ */
+void Sort::generate_reverse_array(const size_t size, std::vector<int64_t>& v) {
+
+    for (int64_t i = size; i > 0; i--) {
+
+        v.push_back(i);
+
+    }
+
+}
+
+/**
+ * @brief Verifies if a given vector of integers is sorted in non-decreasing order.
+ * 
+ * @param v The vector of integers to be checked.
+ * @return int Returns 1 if the vector is sorted in non-decreasing order, otherwise returns 0.
+ */
+int Sort::verify_sorted(const std::vector<int64_t>& v) {
+
+    for (size_t i = 0; i < v.size() - 1; i++) {
+
+        if (v.at(i) > v.at(i + 1)) {
+
+            return 0;
+
+        }
+
+    }
+
+    return 1;
+
 }

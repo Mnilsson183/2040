@@ -26,8 +26,8 @@ run:
 	./$(BUILD_DIR)/main
 
 check:
-	cppcheck $(CPPCHECK_FLAGS) $(SRC_DIR)/*.cpp
-	cpplint $(CPPLINT_FLAGS) $(SRC_DIR)/*.cpp
+	cppcheck $(CPPCHECK_FLAGS) $(SRC_DIR)/*.cpp $(SRC_DIR)/*.hpp
+	cpplint $(CPPLINT_FLAGS) $(SRC_DIR)/*.cpp $(SRC_DIR)/*.hpp
 
 output:
 	make
