@@ -53,19 +53,6 @@ int verify_sorted(const std::vector<int64_t>& v) {
 
 int main(void) {
 
-    //std::vector<int64_t> vec = {0, 1, 2, 3, 4};
-
-    //Sort::quick_sort(vec);
-
-    //std::cout << "Quick sort" << std::endl;
-
-    //for (size_t i = 0; i < vec.size(); i++) {
-    //    std::cout << vec.at(i) << ", ";
-    //}
-
-
-    //return 0;
-
     std::array<std::array<std::array<std::array<std::chrono::milliseconds, ARRAY_SAMPLE_SIZE>, 
         NUMBER_OF_ORDERINGS>, ARRAY_NUMBER_OF_SIZES>, NUMBER_OF_ALGORITHMS> elapsed_times;
 

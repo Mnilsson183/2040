@@ -3,6 +3,7 @@
 #include <vector>
 #include <utility>
 #include <iostream>
+#include <cstdint>
 
 #include "sort.hpp"
 
@@ -132,8 +133,16 @@ void Sort::merge_sort(std::vector<int64_t>& A) {
     
 }
 
+size_t median_of_three(std::vector<int64_t>& A, size_t low, size_t high) {
+    size_t mid = low + (high - low) / 2;
+    if (A[low] > A[mid]) std::swap(A[low], A[mid]);
+    if (A[low] > A[high]) std::swap(A[low], A[high]);
+    if (A[mid] > A[high]) std::swap(A[mid], A[high]);
+    return mid;
+}
+
 size_t Sort::HoarePartition(std::vector<int64_t>& A, const size_t low, const size_t high) {
-    const int64_t p = A.at(low);
+    const int64_t p = A.at(median_of_three(A, low, high));
     size_t i = low - 1;
     size_t j = high + 1;
 
