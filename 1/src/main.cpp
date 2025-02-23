@@ -202,9 +202,9 @@ void print_test_times(const sortingTimes_t times) {
             // identify best times per size and ordering
             for (int algorithm = 0; algorithm < NUMBER_OF_ALGORITHMS; algorithm++) {
 
-                std::chrono::milliseconds min_time = best_times[0];
+                std::chrono::milliseconds min_time = std::chrono::milliseconds(INT64_MAX);
 
-                for (int i = 1; i < NUMBER_OF_ALGORITHMS; i++) {
+                for (int i = 0; i < NUMBER_OF_ALGORITHMS; i++) {
 
                     if (best_times[i] < min_time && best_times[i].count() != -1) {
 
