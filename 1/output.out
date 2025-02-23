@@ -1,0 +1,227 @@
+./build/main
+Algorithm: Bubble Sort
+
+Array size: 10
+Random: 0ms, 0ms, 0ms, 0ms, 0ms, 0ms, 0ms, 0ms, 0ms, 0ms
+Ordered: 0ms, 0ms, 0ms, 0ms, 0ms, 0ms, 0ms, 0ms, 0ms, 0ms
+Reverse: 0ms, 0ms, 0ms, 0ms, 0ms, 0ms, 0ms, 0ms, 0ms, 0ms
+
+Array size: 100
+Random: 0ms, 0ms, 0ms, 0ms, 0ms, 0ms, 0ms, 0ms, 0ms, 0ms
+Ordered: 0ms, 0ms, 0ms, 0ms, 0ms, 0ms, 0ms, 0ms, 0ms, 0ms
+Reverse: 0ms, 0ms, 0ms, 0ms, 0ms, 0ms, 0ms, 0ms, 0ms, 0ms
+
+Array size: 1000
+Random: 4ms, 4ms, 4ms, 4ms, 4ms, 4ms, 4ms, 4ms, 4ms, 4ms
+Ordered: 1ms, 1ms, 1ms, 1ms, 1ms, 1ms, 1ms, 1ms, 1ms, 1ms
+Reverse: 4ms, 4ms, 4ms, 4ms, 4ms, 4ms, 4ms, 4ms, 4ms, 4ms
+
+Array size: 10000
+Random: 429ms, 458ms, 485ms, 466ms, 444ms, 457ms, 436ms, 417ms, 441ms, 431ms
+Ordered: 150ms, 151ms, 159ms, 155ms, 154ms, 155ms, 175ms, 170ms, 164ms, 157ms
+Reverse: 493ms, 503ms, 497ms, 486ms, 481ms, 464ms, 469ms, 456ms, 458ms, 462ms
+
+Array size: 100000
+Random: 43285ms, 43143ms, 42939ms, 42931ms, 42969ms, 42997ms, 43095ms, 43151ms, 43046ms, 43085ms
+Ordered: 14816ms, 14832ms, 14796ms, 14896ms, 14821ms, 14807ms, 14804ms, 14794ms, 14890ms, 14768ms
+Reverse: 46340ms, 46263ms, 46294ms, 46124ms, 46209ms, 46300ms, 46120ms, 46310ms, 46114ms, 46047ms
+
+Array size: 1000000
+Random: N/A, N/A, N/A, N/A, N/A, N/A, N/A, N/A, N/A, N/A
+Ordered: N/A, N/A, N/A, N/A, N/A, N/A, N/A, N/A, N/A, N/A
+Reverse: N/A, N/A, N/A, N/A, N/A, N/A, N/A, N/A, N/A, N/A
+
+Array size: 10000000
+Random: N/A, N/A, N/A, N/A, N/A, N/A, N/A, N/A, N/A, N/A
+Ordered: N/A, N/A, N/A, N/A, N/A, N/A, N/A, N/A, N/A, N/A
+Reverse: N/A, N/A, N/A, N/A, N/A, N/A, N/A, N/A, N/A, N/A
+
+Algorithm: Insertion Sort
+
+Array size: 10
+Random: 0ms, 0ms, 0ms, 0ms, 0ms, 0ms, 0ms, 0ms, 0ms, 0ms
+Ordered: 0ms, 0ms, 0ms, 0ms, 0ms, 0ms, 0ms, 0ms, 0ms, 0ms
+Reverse: 0ms, 0ms, 0ms, 0ms, 0ms, 0ms, 0ms, 0ms, 0ms, 0ms
+
+Array size: 100
+Random: 0ms, 0ms, 0ms, 0ms, 0ms, 0ms, 0ms, 0ms, 0ms, 0ms
+Ordered: 0ms, 0ms, 0ms, 0ms, 0ms, 0ms, 0ms, 0ms, 0ms, 0ms
+Reverse: 0ms, 0ms, 0ms, 0ms, 0ms, 0ms, 0ms, 0ms, 0ms, 0ms
+
+Array size: 1000
+Random: 1ms, 1ms, 1ms, 1ms, 1ms, 1ms, 1ms, 1ms, 1ms, 1ms
+Ordered: 0ms, 0ms, 0ms, 0ms, 0ms, 0ms, 0ms, 0ms, 0ms, 0ms
+Reverse: 2ms, 2ms, 2ms, 2ms, 2ms, 2ms, 2ms, 2ms, 2ms, 2ms
+
+Array size: 10000
+Random: 117ms, 135ms, 130ms, 125ms, 126ms, 124ms, 121ms, 118ms, 134ms, 119ms
+Ordered: 0ms, 0ms, 0ms, 0ms, 0ms, 0ms, 0ms, 0ms, 0ms, 0ms
+Reverse: 269ms, 265ms, 261ms, 252ms, 241ms, 242ms, 248ms, 240ms, 242ms, 243ms
+
+Array size: 100000
+Random: 12156ms, 12143ms, 12096ms, 12118ms, 12104ms, 12132ms, 12110ms, 12116ms, 12184ms, 12120ms
+Ordered: 0ms, 0ms, 0ms, 0ms, 0ms, 0ms, 0ms, 0ms, 0ms, 0ms
+Reverse: 24282ms, 24243ms, 24237ms, 24394ms, 24293ms, 24236ms, 24111ms, 24119ms, 24116ms, 24138ms
+
+Array size: 1000000
+Random: N/A, N/A, N/A, N/A, N/A, N/A, N/A, N/A, N/A, N/A
+Ordered: N/A, N/A, N/A, N/A, N/A, N/A, N/A, N/A, N/A, N/A
+Reverse: N/A, N/A, N/A, N/A, N/A, N/A, N/A, N/A, N/A, N/A
+
+Array size: 10000000
+Random: N/A, N/A, N/A, N/A, N/A, N/A, N/A, N/A, N/A, N/A
+Ordered: N/A, N/A, N/A, N/A, N/A, N/A, N/A, N/A, N/A, N/A
+Reverse: N/A, N/A, N/A, N/A, N/A, N/A, N/A, N/A, N/A, N/A
+
+Algorithm: Selection Sort
+
+Array size: 10
+Random: 0ms, 0ms, 0ms, 0ms, 0ms, 0ms, 0ms, 0ms, 0ms, 0ms
+Ordered: 0ms, 0ms, 0ms, 0ms, 0ms, 0ms, 0ms, 0ms, 0ms, 0ms
+Reverse: 0ms, 0ms, 0ms, 0ms, 0ms, 0ms, 0ms, 0ms, 0ms, 0ms
+
+Array size: 100
+Random: 0ms, 0ms, 0ms, 0ms, 0ms, 0ms, 0ms, 0ms, 0ms, 0ms
+Ordered: 0ms, 0ms, 0ms, 0ms, 0ms, 0ms, 0ms, 0ms, 0ms, 0ms
+Reverse: 0ms, 0ms, 0ms, 0ms, 0ms, 0ms, 0ms, 0ms, 0ms, 0ms
+
+Array size: 1000
+Random: 1ms, 1ms, 1ms, 1ms, 1ms, 1ms, 1ms, 1ms, 1ms, 1ms
+Ordered: 1ms, 1ms, 1ms, 1ms, 1ms, 1ms, 1ms, 1ms, 1ms, 1ms
+Reverse: 1ms, 1ms, 1ms, 1ms, 1ms, 1ms, 1ms, 1ms, 1ms, 1ms
+
+Array size: 10000
+Random: 167ms, 211ms, 193ms, 176ms, 184ms, 177ms, 171ms, 172ms, 174ms, 178ms
+Ordered: 178ms, 183ms, 187ms, 183ms, 185ms, 186ms, 183ms, 200ms, 188ms, 186ms
+Reverse: 187ms, 178ms, 178ms, 174ms, 166ms, 169ms, 169ms, 166ms, 170ms, 164ms
+
+Array size: 100000
+Random: 17053ms, 17035ms, 17015ms, 17028ms, 17037ms, 17167ms, 16993ms, 17109ms, 17083ms, 17084ms
+Ordered: 17316ms, 17262ms, 17270ms, 17344ms, 17273ms, 17223ms, 17243ms, 17178ms, 17242ms, 17208ms
+Reverse: 16615ms, 16621ms, 16574ms, 16572ms, 16647ms, 16630ms, 16530ms, 16536ms, 16500ms, 16571ms
+
+Array size: 1000000
+Random: N/A, N/A, N/A, N/A, N/A, N/A, N/A, N/A, N/A, N/A
+Ordered: N/A, N/A, N/A, N/A, N/A, N/A, N/A, N/A, N/A, N/A
+Reverse: N/A, N/A, N/A, N/A, N/A, N/A, N/A, N/A, N/A, N/A
+
+Array size: 10000000
+Random: N/A, N/A, N/A, N/A, N/A, N/A, N/A, N/A, N/A, N/A
+Ordered: N/A, N/A, N/A, N/A, N/A, N/A, N/A, N/A, N/A, N/A
+Reverse: N/A, N/A, N/A, N/A, N/A, N/A, N/A, N/A, N/A, N/A
+
+Algorithm: Merge Sort
+
+Array size: 10
+Random: 0ms, 0ms, 0ms, 0ms, 0ms, 0ms, 0ms, 0ms, 0ms, 0ms
+Ordered: 0ms, 0ms, 0ms, 0ms, 0ms, 0ms, 0ms, 0ms, 0ms, 0ms
+Reverse: 0ms, 0ms, 0ms, 0ms, 0ms, 0ms, 0ms, 0ms, 0ms, 0ms
+
+Array size: 100
+Random: 0ms, 0ms, 0ms, 0ms, 0ms, 0ms, 0ms, 0ms, 0ms, 0ms
+Ordered: 0ms, 0ms, 0ms, 0ms, 0ms, 0ms, 0ms, 0ms, 0ms, 0ms
+Reverse: 0ms, 0ms, 0ms, 0ms, 0ms, 0ms, 0ms, 0ms, 0ms, 0ms
+
+Array size: 1000
+Random: 0ms, 0ms, 0ms, 0ms, 0ms, 0ms, 0ms, 0ms, 0ms, 0ms
+Ordered: 0ms, 0ms, 0ms, 0ms, 0ms, 0ms, 0ms, 0ms, 0ms, 0ms
+Reverse: 0ms, 0ms, 0ms, 0ms, 0ms, 0ms, 0ms, 0ms, 0ms, 0ms
+
+Array size: 10000
+Random: 5ms, 8ms, 5ms, 5ms, 5ms, 5ms, 4ms, 5ms, 5ms, 5ms
+Ordered: 4ms, 5ms, 7ms, 4ms, 4ms, 7ms, 5ms, 8ms, 4ms, 4ms
+Reverse: 4ms, 4ms, 4ms, 4ms, 4ms, 4ms, 4ms, 4ms, 4ms, 4ms
+
+Array size: 100000
+Random: 55ms, 54ms, 57ms, 55ms, 54ms, 57ms, 56ms, 55ms, 61ms, 56ms
+Ordered: 46ms, 47ms, 47ms, 47ms, 46ms, 46ms, 48ms, 46ms, 47ms, 47ms
+Reverse: 46ms, 47ms, 46ms, 45ms, 48ms, 46ms, 47ms, 47ms, 46ms, 46ms
+
+Array size: 1000000
+Random: 597ms, 584ms, 583ms, 590ms, 588ms, 593ms, 588ms, 594ms, 593ms, 590ms
+Ordered: 483ms, 489ms, 484ms, 480ms, 487ms, 496ms, 485ms, 483ms, 485ms, 482ms
+Reverse: 490ms, 491ms, 486ms, 486ms, 482ms, 488ms, 484ms, 487ms, 488ms, 492ms
+
+Array size: 10000000
+Random: 6793ms, 6833ms, 6873ms, 6827ms, 6895ms, 6840ms, 6798ms, 6839ms, 6814ms, 6804ms
+Ordered: 5677ms, 5622ms, 5662ms, 5599ms, 5608ms, 5700ms, 5634ms, 5719ms, 5622ms, 5619ms
+Reverse: 5679ms, 5582ms, 5669ms, 5595ms, 5645ms, 5606ms, 5662ms, 5628ms, 5639ms, 5590ms
+
+Algorithm: Quick Sort
+
+Array size: 10
+Random: 0ms, 0ms, 0ms, 0ms, 0ms, 0ms, 0ms, 0ms, 0ms, 0ms
+Ordered: 0ms, 0ms, 0ms, 0ms, 0ms, 0ms, 0ms, 0ms, 0ms, 0ms
+Reverse: 0ms, 0ms, 0ms, 0ms, 0ms, 0ms, 0ms, 0ms, 0ms, 0ms
+
+Array size: 100
+Random: 0ms, 0ms, 0ms, 0ms, 0ms, 0ms, 0ms, 0ms, 0ms, 0ms
+Ordered: 0ms, 0ms, 0ms, 0ms, 0ms, 0ms, 0ms, 0ms, 0ms, 0ms
+Reverse: 0ms, 0ms, 0ms, 0ms, 0ms, 0ms, 0ms, 0ms, 0ms, 0ms
+
+Array size: 1000
+Random: 0ms, 0ms, 0ms, 0ms, 0ms, 0ms, 0ms, 0ms, 0ms, 0ms
+Ordered: 0ms, 0ms, 0ms, 0ms, 0ms, 0ms, 0ms, 0ms, 0ms, 0ms
+Reverse: 0ms, 0ms, 0ms, 0ms, 0ms, 0ms, 0ms, 0ms, 0ms, 0ms
+
+Array size: 10000
+Random: 1ms, 1ms, 1ms, 1ms, 1ms, 1ms, 1ms, 1ms, 1ms, 1ms
+Ordered: 0ms, 0ms, 0ms, 0ms, 0ms, 0ms, 0ms, 0ms, 0ms, 0ms
+Reverse: 0ms, 0ms, 0ms, 0ms, 0ms, 0ms, 0ms, 0ms, 0ms, 0ms
+
+Array size: 100000
+Random: 14ms, 15ms, 15ms, 15ms, 14ms, 15ms, 15ms, 15ms, 15ms, 15ms
+Ordered: 4ms, 4ms, 4ms, 4ms, 4ms, 4ms, 4ms, 4ms, 4ms, 4ms
+Reverse: 5ms, 5ms, 5ms, 5ms, 4ms, 4ms, 4ms, 5ms, 5ms, 4ms
+
+Array size: 1000000
+Random: 175ms, 176ms, 176ms, 174ms, 173ms, 176ms, 173ms, 173ms, 173ms, 173ms
+Ordered: 53ms, 54ms, 52ms, 54ms, 53ms, 52ms, 53ms, 52ms, 53ms, 54ms
+Reverse: 55ms, 56ms, 55ms, 56ms, 56ms, 56ms, 55ms, 57ms, 56ms, 56ms
+
+Array size: 10000000
+Random: 2012ms, 1997ms, 2010ms, 2034ms, 2063ms, 1991ms, 2019ms, 2032ms, 1995ms, 2016ms
+Ordered: 608ms, 621ms, 607ms, 619ms, 610ms, 633ms, 610ms, 618ms, 604ms, 639ms
+Reverse: 631ms, 665ms, 640ms, 661ms, 644ms, 656ms, 648ms, 647ms, 634ms, 636ms
+
+Array size: 10
+            B        I        S        M        Q        
+  Random:   [1;31m0ms, [0m    [1;31m0ms, [0m    [1;31m0ms, [0m    [1;31m0ms, [0m    [1;31m0ms[0m      
+  Ordered:  [1;31m0ms, [0m    [1;31m0ms, [0m    [1;31m0ms, [0m    [1;31m0ms, [0m    [1;31m0ms[0m      
+  Reverse:  [1;31m0ms, [0m    [1;31m0ms, [0m    [1;31m0ms, [0m    [1;31m0ms, [0m    [1;31m0ms[0m      
+
+Array size: 100
+            B        I        S        M        Q        
+  Random:   [1;31m0ms, [0m    [1;31m0ms, [0m    [1;31m0ms, [0m    [1;31m0ms, [0m    [1;31m0ms[0m      
+  Ordered:  [1;31m0ms, [0m    [1;31m0ms, [0m    [1;31m0ms, [0m    [1;31m0ms, [0m    [1;31m0ms[0m      
+  Reverse:  [1;31m0ms, [0m    [1;31m0ms, [0m    [1;31m0ms, [0m    [1;31m0ms, [0m    [1;31m0ms[0m      
+
+Array size: 1000
+            B        I        S        M        Q        
+  Random:   4ms, [0m    1ms, [0m    1ms, [0m    [1;31m0ms, [0m    [1;31m0ms[0m      
+  Ordered:  1ms, [0m    [1;31m0ms, [0m    1ms, [0m    [1;31m0ms, [0m    [1;31m0ms[0m      
+  Reverse:  4ms, [0m    2ms, [0m    1ms, [0m    [1;31m0ms, [0m    [1;31m0ms[0m      
+
+Array size: 10000
+            B        I        S        M        Q        
+  Random:   417ms, [0m  117ms, [0m  167ms, [0m  4ms, [0m    [1;31m1ms[0m      
+  Ordered:  150ms, [0m  [1;31m0ms, [0m    178ms, [0m  4ms, [0m    [1;31m0ms[0m      
+  Reverse:  456ms, [0m  240ms, [0m  164ms, [0m  4ms, [0m    [1;31m0ms[0m      
+
+Array size: 100000
+            B        I        S        M        Q        
+  Random:   42931ms, [0m12096ms, [0m16993ms, [0m54ms, [0m   [1;31m14ms[0m     
+  Ordered:  14768ms, [0m[1;31m0ms, [0m    17178ms, [0m46ms, [0m   4ms[0m      
+  Reverse:  46047ms, [0m24111ms, [0m16500ms, [0m45ms, [0m   [1;31m4ms[0m      
+
+Array size: 1000000
+            B        I        S        M        Q        
+  Random:   N/A,     N/A,     N/A,     583ms, [0m  [1;31m173ms[0m    
+  Ordered:  N/A,     N/A,     N/A,     480ms, [0m  [1;31m52ms[0m     
+  Reverse:  N/A,     N/A,     N/A,     482ms, [0m  [1;31m55ms[0m     
+
+Array size: 10000000
+            B        I        S        M        Q        
+  Random:   N/A,     N/A,     N/A,     6793ms, [0m [1;31m1991ms[0m   
+  Ordered:  N/A,     N/A,     N/A,     5599ms, [0m [1;31m604ms[0m    
+  Reverse:  N/A,     N/A,     N/A,     5582ms, [0m [1;31m631ms[0m    
