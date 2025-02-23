@@ -10,6 +10,10 @@
 /**
  * @brief Sorts a vector of integers using the bubble sort algorithm.
  * 
+ * CS2040
+ * @author Morgan Nilsson
+ * @date 2025-01-01
+ * 
  * @param A A reference to the vector of integers to be sorted.
  */
 void Sort::bubble_sort(std::vector<int64_t>& A) {
@@ -32,6 +36,10 @@ void Sort::bubble_sort(std::vector<int64_t>& A) {
 
 /**
  * @brief Sorts a vector of integers using the insertion sort algorithm.
+ * 
+ * CS2040
+ * @author Morgan Nilsson
+ * @date 2025-01-01
  * 
  * @param A A reference to the vector of integers to be sorted.
  */
@@ -61,6 +69,10 @@ void Sort::insertion_sort(std::vector<int64_t>& A) {
 /**
  * @brief Sorts a vector of integers using the selection sort algorithm.
  * 
+ * CS2040
+ * @author Morgan Nilsson
+ * @date 2025-01-01
+ * 
  * @param A A reference to the vector of integers to be sorted.
  */
 void Sort::selection_sort(std::vector<int64_t>& A) {
@@ -84,6 +96,17 @@ void Sort::selection_sort(std::vector<int64_t>& A) {
     
 }
 
+/**
+ * @brief Merges two sorted vectors into a single sorted vector.
+ * 
+ * CS2040
+ * @author Morgan Nilsson
+ * @date 2025-01-01
+ * 
+ * @param B The first sorted vector.
+ * @param C The second sorted vector.
+ * @param A The vector to store the merged sorted vectors.
+ */
 void Sort::merge(const std::vector<int64_t>& B, const std::vector<int64_t>& C, std::vector<int64_t>& A) {
 
     const size_t p = B.size();
@@ -126,6 +149,10 @@ void Sort::merge(const std::vector<int64_t>& B, const std::vector<int64_t>& C, s
 /**
  * @brief Sorts a vector of integers using the merge sort algorithm.
  * 
+ * CS2040
+ * @author Morgan Nilsson
+ * @date 2025-01-01
+ * 
  * @param A A reference to the vector of integers to be sorted.
  */
 void Sort::merge_sort(std::vector<int64_t>& A) {
@@ -156,6 +183,18 @@ void Sort::merge_sort(std::vector<int64_t>& A) {
     
 }
 
+/**
+ * @brief Finds the median of three elements in a vector.
+ * 
+ * CS2040
+ * @author Morgan Nilsson
+ * @date 2025-01-01
+ * 
+ * @param A The vector of integers to find the median of.
+ * @param low The starting index of the portion of the vector to find the median of.
+ * @param high The ending index of the portion of the vector to find the median of.
+ * @return size_t The index of the median element.
+ */
 size_t Sort::median_of_three(std::vector<int64_t>& A, size_t low, size_t high) {
 
     size_t mid = low + (high - low) / 2;
@@ -170,6 +209,18 @@ size_t Sort::median_of_three(std::vector<int64_t>& A, size_t low, size_t high) {
 
 }
 
+/**
+ * @brief Partitions the given vector using Hoare's partitioning scheme with median of three partitioning.
+ *
+ * CS2040
+ * @author Morgan Nilsson
+ * @date 2025-01-01
+ *
+ * @param A The vector of integers to be partitioned.
+ * @param low The starting index of the portion of the vector to be partitioned.
+ * @param high The ending index of the portion of the vector to be partitioned.
+ * @return The index of the pivot element after partitioning.
+ */
 size_t Sort::HoarePartition(std::vector<int64_t>& A, const size_t low, const size_t high) {
 
     const int64_t p = A.at(median_of_three(A, low, high));
@@ -194,6 +245,17 @@ size_t Sort::HoarePartition(std::vector<int64_t>& A, const size_t low, const siz
 
 }
 
+/**
+ * @brief Performs a quick sort on a subarray of integers.
+ * 
+ * CS2040
+ * @author Morgan Nilsson
+ * @date 2025-01-01
+ * 
+ * @param A The vector of integers to be sorted.
+ * @param low The starting index of the subarray to be sorted.
+ * @param high The ending index of the subarray to be sorted.
+ */
 void Sort::private_quick_sort(std::vector<int64_t>& A, const size_t low, const size_t high) {
 
     if (low < high) {
@@ -209,6 +271,12 @@ void Sort::private_quick_sort(std::vector<int64_t>& A, const size_t low, const s
 /**
  * @brief Sorts a vector of integers using the Quick Sort algorithm.
  * 
+ * @note This function is a wrapper for the private_quick_sort function.
+ * 
+ * CS2040
+ * @author Morgan Nilsson
+ * @date 2025-01-01
+ * 
  * @param A A reference to a vector of int64_t integers to be sorted.
  */
 void Sort::quick_sort(std::vector<int64_t>& A) {
@@ -220,6 +288,10 @@ void Sort::quick_sort(std::vector<int64_t>& A) {
 
 /**
  * @brief Generates a random array of integers.
+ * 
+ * CS2040
+ * @author Morgan Nilsson
+ * @date 2025-01-01
  * 
  * @param size The number of random integers to generate.
  * @param v The vector to be filled with random integers.
@@ -237,6 +309,10 @@ void Sort::generate_random_array(const size_t size, std::vector<int64_t>& v) {
 /**
  * @brief Generates an ordered array of integers.
  * 
+ * CS2040
+ * @author Morgan Nilsson
+ * @date 2025-01-01
+ * 
  * @param size The number of elements to generate.
  * @param v The vector to be filled with ordered integers.
  */
@@ -253,6 +329,10 @@ void Sort::generate_ordered_array(const size_t size, std::vector<int64_t>& v) {
 /**
  * @brief Generates a reverse sorted array of integers.
  * 
+ * CS2040
+ * @author Morgan Nilsson
+ * @date 2025-01-01
+ * 
  * @param size The number of elements to generate in the array.
  * @param v The vector to be filled with reverse ordered integers.
  */
@@ -268,6 +348,10 @@ void Sort::generate_reverse_array(const size_t size, std::vector<int64_t>& v) {
 
 /**
  * @brief Verifies if a given vector of integers is sorted in non-decreasing order.
+ * 
+ * CS2040
+ * @author Morgan Nilsson
+ * @date 2025-01-01
  * 
  * @param v The vector of integers to be checked.
  * @return int Returns 1 if the vector is sorted in non-decreasing order, otherwise returns 0.

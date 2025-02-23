@@ -33,36 +33,46 @@ typedef void (*sorting_algorithm_fn_t)(std::vector<int64_t>&);
 typedef void (*data_generation_fn_t)(const size_t, std::vector<int64_t>&);
 
 // array of the sorting functions
-std::array<sorting_algorithm_fn_t, NUMBER_OF_ALGORITHMS> sorting_functions = {
+const std::array<sorting_algorithm_fn_t, NUMBER_OF_ALGORITHMS> sorting_functions = {
     Sort::bubble_sort, Sort::insertion_sort, Sort::selection_sort, Sort::merge_sort, Sort::quick_sort};
 
 // array of generating data functions
-std::array<data_generation_fn_t, NUMBER_OF_ORDERINGS> generating_functions = {
+const std::array<data_generation_fn_t, NUMBER_OF_ORDERINGS> generating_functions = {
     Sort::generate_random_array, Sort::generate_ordered_array, Sort::generate_reverse_array};
 
 /**
- * @brief Performs a deep copy of a vector of int64_t elements.
+ * @brief Performs a deep copy of a vector.
+ * 
+ * CS2040
+ * @author Morgan Nilsson
+ * @date 2025-01-01
  * 
  * @param src The source
  * @param dest The destination
  */
 void deep_copy_vector(const std::vector<int64_t>& src, std::vector<int64_t>& dest) {
+
     dest.clear();
     dest.reserve(src.size());
+
     for (size_t i = 0; i < src.size(); i++) {
+
         dest.push_back(src[i]);
+
     }
+
 }
 
 /**
  * @brief Measures the time taken by a sorting algorithm to sort a vector.
  * 
- * This function takes a sorting algorithm and a vector of integers, runs the sorting algorithm on the vector,
- * and measures the time taken to complete the sorting. The duration is returned in milliseconds.
+ * CS2040
+ * @author Morgan Nilsson
+ * @date 2025-01-01
  * 
  * @param sorting_algorithm A function pointer to the sorting algorithm to be used.
  * @param sortableVector A reference to the vector of integers to be sorted.
- * @return std::chrono::milliseconds The duration taken by the sorting algorithm to sort the vector.
+ * @return std::chrono::milliseconds The duration taken by the sorting algorithm to sort the vector in milliseconds.
  * 
  * @note If VERIFY is defined, the function will check if the vector is sorted after the sorting algorithm is run.
  *       If the vector is not sorted, it will print an error message.
@@ -70,18 +80,23 @@ void deep_copy_vector(const std::vector<int64_t>& src, std::vector<int64_t>& des
 std::chrono::milliseconds run_sorting_algorithm(sorting_algorithm_fn_t sorting_algorithm, std::vector<int64_t>& sortableVector){
 
     auto start = std::chrono::high_resolution_clock::now();
+
     sorting_algorithm(sortableVector);
+
     auto end = std::chrono::high_resolution_clock::now();
     auto duration = std::chrono::duration_cast<std::chrono::milliseconds>(end - start);
 
     #if VERIFY
     int sorted = Sort::verify_sorted(sortableVector);
     if (!sorted) {
+
         std::cout << "Array not sorted! " << std::endl;
+
     }
     #endif
 
     return duration;
+
 }
 
 void print_test_times(const sortingTimes_t times) {
@@ -133,22 +148,48 @@ void print_test_times(const sortingTimes_t times) {
 
     }
 
-    // print best times for each time highlight the best of each group
+    const unsigned int spacing = 8;
+
+    // print best times for each array size and ordering
     for (size_t arr_size = 0; arr_size < ARRAY_NUMBER_OF_SIZES; arr_size++) {
 
         std::cout << "Array size: " << array_sizes[arr_size] << std::endl;
 
+        std::cout << "            ";
+        for (int i = 0; i < NUMBER_OF_ALGORITHMS; i++) {
+
+            std::cout << algorithm_names[i][0];
+            for (unsigned int j = 0; j < spacing; j++) {
+
+                std::cout << " ";
+
+            }
+
+        }
+        std::cout << std::endl;
+
         for (int ordering = 0; ordering < NUMBER_OF_ORDERINGS; ordering++) {
 
-            std::cout << "  " << generation_names[ordering] << ": ";
+            std::cout << "  " << generation_names[ordering] << ":";
 
+            // align the first times with the algorithm names
+            const int spacing_start = 9 - generation_names[ordering].length();
+            for (int i = 0; i < spacing_start; i++) {
+
+                std::cout << " ";
+
+            }
+
+            // get the best time out of all samples
             std::chrono::milliseconds best_times[NUMBER_OF_ALGORITHMS];
 
-            for (int sample = 0; sample < ARRAY_SAMPLE_SIZE; sample++) {
+            for (int algorithm = 0; algorithm < NUMBER_OF_ALGORITHMS; algorithm++) {
 
-                for (int algorithm = 0; algorithm < NUMBER_OF_ALGORITHMS; algorithm++) {
+                best_times[algorithm] = times[algorithm][arr_size][ordering][0];
 
-                    if (sample == 0 || times[algorithm][arr_size][ordering][sample] < best_times[algorithm]) {
+                for (int sample = 1; sample < ARRAY_SAMPLE_SIZE; sample++) {
+
+                    if (times[algorithm][arr_size][ordering][sample] < best_times[algorithm] && times[algorithm][arr_size][ordering][sample].count() != -1) {
 
                         best_times[algorithm] = times[algorithm][arr_size][ordering][sample];
 
@@ -158,10 +199,9 @@ void print_test_times(const sortingTimes_t times) {
 
             }
 
-
+            // identify best times per size and ordering
             for (int algorithm = 0; algorithm < NUMBER_OF_ALGORITHMS; algorithm++) {
 
-                // calculate the min time of the best times
                 std::chrono::milliseconds min_time = best_times[0];
 
                 for (int i = 1; i < NUMBER_OF_ALGORITHMS; i++) {
@@ -174,11 +214,17 @@ void print_test_times(const sortingTimes_t times) {
 
                 }
 
+                int spaces_to_print = spacing + 1;
+
                 if (best_times[algorithm].count() == -1) {
 
                     std::cout << "N/A";
+                    spaces_to_print -= 3;
                     if (algorithm != NUMBER_OF_ALGORITHMS - 1) {
+
                         std::cout << ", ";
+                        spaces_to_print -= 2;
+
                     }
 
                 } else {
@@ -191,15 +237,24 @@ void print_test_times(const sortingTimes_t times) {
                     }
                     std::cout << best_times[algorithm].count() << "ms";
 
+                    spaces_to_print -= std::to_string(best_times[algorithm].count()).length() + 2;
+
                     if (algorithm != NUMBER_OF_ALGORITHMS - 1) {
 
                         std::cout << ", ";
+                        
+                        spaces_to_print -= 2;
 
                     }
 
                     // clear color
                     std::cout << "\033[0m";
 
+                }
+
+                // match the spacing
+                for (int i = 0; i < spaces_to_print; i++) {
+                    std::cout << " ";
                 }
 
             }
@@ -214,6 +269,15 @@ void print_test_times(const sortingTimes_t times) {
 
 }
 
+/**
+ * @brief Main function to test sorting algorithms on various array sizes and orderings.
+ * 
+ * CS2040
+ * @author Morgan Nilsson
+ * @date 2025-01-01
+ *
+ * @return int Returns 0 upon successful completion.
+ */
 int main(void) {
 
     sortingTimes_t elapsed_times;
@@ -226,6 +290,7 @@ int main(void) {
 
     // for each size of array to test
     for (size_t arr_size = 0; arr_size < ARRAY_NUMBER_OF_SIZES; arr_size++) {
+
         size_t size = array_sizes.at(arr_size);
 
         // for every ordering type
@@ -233,6 +298,7 @@ int main(void) {
 
             // generate arrays
             for (int sample = 0; sample < ARRAY_SAMPLE_SIZE; sample++) {
+
                 src_arrays.at(sample).clear();
                 (generating_functions.at(ordering))(size, src_arrays.at(sample));
             }
@@ -250,10 +316,13 @@ int main(void) {
 
                     // if using selection insertion or bubble and array > 100 000 skip
                     if (algorithm < 3 && size > 100000) {
+
                         elapsed_times.at(algorithm).at(arr_size).at(ordering).at(sample) = std::chrono::milliseconds(-1);
+
                         #if DEBUG
                         std::cout << " skipped" << std::endl;
                         #endif
+
                         continue;
                     }
 
