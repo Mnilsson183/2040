@@ -1,5 +1,5 @@
 CC=g++
-CC_FLAGS=-std=c++11 -Werror -Wall -Wextra -pedantic
+CC_FLAGS=-std=c++11 -Werror -Wall -Wextra -pedantic -g
 
 BUILD_DIR=build
 SRC_DIR=src
@@ -28,3 +28,8 @@ run:
 check:
 	cppcheck $(CPPCHECK_FLAGS) $(SRC_DIR)/*.cpp
 	cpplint $(CPPLINT_FLAGS) $(SRC_DIR)/*.cpp
+
+output:
+	make
+	@echo "outputing to output.out"
+	make run | tee output.out

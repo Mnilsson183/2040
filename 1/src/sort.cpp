@@ -2,6 +2,7 @@
 
 #include <vector>
 #include <utility>
+#include <iostream>
 
 #include "sort.hpp"
 
@@ -106,7 +107,6 @@ void Sort::merge(const std::vector<int64_t>& B, const std::vector<int64_t>& C, s
 }
 
 void Sort::merge_sort(std::vector<int64_t>& A) {
-
     size_t n = A.size();
 
     if (n > 1) {
@@ -115,11 +115,11 @@ void Sort::merge_sort(std::vector<int64_t>& A) {
         std::vector<int64_t> C;
 
         for (size_t i = 0; i < n / 2; i++) {
-            B.push_back(A[i]);
+            B.push_back(A.at(i));
         }
 
         for (size_t i = n / 2; i < n; i++) {
-            C.push_back(A[i]);
+            C.push_back(A.at(i));
         }
 
         merge_sort(B);
@@ -133,28 +133,29 @@ void Sort::merge_sort(std::vector<int64_t>& A) {
 }
 
 size_t Sort::HoarePartition(std::vector<int64_t>& A, const size_t low, const size_t high) {
-    const int64_t p = A[low];
-    size_t i = low;
+    const int64_t p = A.at(low);
+    size_t i = low - 1;
     size_t j = high + 1;
 
-    do {
+    while (1) {
 
         do {
             ++i;
-        } while(i < high && A[i] < p);
+        } while(A[i] < p && i < high);
 
         do {
             --j;
-        } while(j > low && A[j] > p);
+        } while(A[j] > p && j > low);
 
-        std::swap(A[i], A[j]);
+        if (i >= j) return j;
 
-    } while (i < j);
+        //std::cout << "i: " << i << " j: " << j << std::endl;
 
-    std::swap(A[i], A[j]);
-    std::swap(A[low], A[j]);
+        std::swap(A.at(i), A.at(j));
 
-    return j;
+        //std::cout << "SAFE" << std::endl;
+    
+    }
 
 }
 
@@ -164,7 +165,7 @@ void Sort::private_quick_sort(std::vector<int64_t>& A, const size_t low, const s
     if (low < high) {
 
         const size_t s = HoarePartition(A, low, high);
-        private_quick_sort(A, low, s - 1);
+        private_quick_sort(A, low, s);
         private_quick_sort(A, s + 1, high);
     }
 }
@@ -173,5 +174,4 @@ void Sort::private_quick_sort(std::vector<int64_t>& A, const size_t low, const s
 void Sort::quick_sort(std::vector<int64_t>& A) {
 
     private_quick_sort(A, 0, A.size() - 1);
-    
 }

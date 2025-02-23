@@ -12,9 +12,9 @@
 #define DEBUG 1
 #define VERIFY 1
 
-//const std::array<int, 3> array_sizes = {10, 100, 1000};
+//const std::array<size_t, 3> array_sizes = {10, 100, 1000};
 const std::array<size_t, 7> array_sizes = {10, 100, 1000, 10000, 100000, 1000000, 10000000};
-#define ARRAY_NUMBER_OF_SIZES 7
+#define ARRAY_NUMBER_OF_SIZES array_sizes.size()
 
 const std::array<std::string, 5> algorithm_names = {"Bubble Sort", "Insertion Sort", "Selection Sort", "Merge Sort", "Quick Sort"};
 #define NUMBER_OF_ALGORITHMS 5
@@ -44,7 +44,7 @@ void generate_reverse_array(const size_t size, std::vector<int64_t>& v) {
 
 int verify_sorted(const std::vector<int64_t>& v) {
     for (size_t i = 0; i < v.size() - 1; i++) {
-        if (v[i] > v[i + 1]) {
+        if (v.at(i) > v.at(i + 1)) {
             return 0;
         }
     }
@@ -52,6 +52,19 @@ int verify_sorted(const std::vector<int64_t>& v) {
 }
 
 int main(void) {
+
+    //std::vector<int64_t> vec = {0, 1, 2, 3, 4};
+
+    //Sort::quick_sort(vec);
+
+    //std::cout << "Quick sort" << std::endl;
+
+    //for (size_t i = 0; i < vec.size(); i++) {
+    //    std::cout << vec.at(i) << ", ";
+    //}
+
+
+    //return 0;
 
     std::array<std::array<std::array<std::array<std::chrono::milliseconds, ARRAY_SAMPLE_SIZE>, 
         NUMBER_OF_ORDERINGS>, ARRAY_NUMBER_OF_SIZES>, NUMBER_OF_ALGORITHMS> elapsed_times;
@@ -67,8 +80,8 @@ int main(void) {
         generate_random_array, generate_ordered_array, generate_reverse_array};
 
 
-    for (int arr_size = 0; arr_size < ARRAY_NUMBER_OF_SIZES; arr_size++) {
-        size_t size = array_sizes[arr_size];
+    for (size_t arr_size = 0; arr_size < ARRAY_NUMBER_OF_SIZES; arr_size++) {
+        size_t size = array_sizes.at(arr_size);
 
         #if DEBUG
         std::cout << "Array size: " << size << std::endl;
@@ -78,8 +91,8 @@ int main(void) {
 
             // generate arrays
             for (int sample = 0; sample < ARRAY_SAMPLE_SIZE; sample++) {
-                src_arrays[sample].clear();
-                (generating_functions[ordering])(size, src_arrays[sample]);
+                src_arrays.at(sample).clear();
+                (generating_functions.at(ordering))(size, src_arrays.at(sample));
             }
 
             // sort arrays
@@ -87,39 +100,41 @@ int main(void) {
 
                 for (int algorithm = 0; algorithm < NUMBER_OF_ALGORITHMS; algorithm++) {
                     #if DEBUG
-                    std::cout << "Numbers size " << src_arrays[sample].size() << " Ordering type: " << generation_names[ordering] << " sample: " << sample << " algorithm: " << algorithm_names[algorithm];
+                    std::cout << "Numbers size " << src_arrays.at(sample).size() << " Ordering type: " << generation_names[ordering] << " sample: " << sample << " algorithm: " << algorithm_names[algorithm];
                     std::flush(std::cout);
                     #endif
                     // if using selection insertion or bubble and array > 100 000 skip
-                    if (algorithm < 3 && size > array_sizes[0]) {
-                        elapsed_times[algorithm][arr_size][ordering][sample] = std::chrono::milliseconds(-1);
+                    if (algorithm < 3 && size > 1000) {
+                        elapsed_times.at(algorithm).at(arr_size).at(ordering).at(sample) = std::chrono::milliseconds(-1);
                         #if DEBUG
                         std::cout << " skipped" << std::endl;
                         #endif
                         continue;
                     }
                     // if using merge or quick and array < 100 000 skip
-                    if (algorithm >= 3 && size < array_sizes[1]) {
-                        elapsed_times[algorithm][arr_size][ordering][sample] = std::chrono::milliseconds(-1);
+                    if (algorithm >= 3 && size < 100000) {
+                        elapsed_times.at(algorithm).at(arr_size).at(ordering).at(sample) = std::chrono::milliseconds(-1);
                         #if DEBUG
                         std::cout << " skipped" << std::endl;
                         #endif
                         continue;
                     }
 
-                    // if quicksort and is reverse or ordered skip
-                    if (algorithm == 4 && ordering != 0) {
-                        elapsed_times[algorithm][arr_size][ordering][sample] = std::chrono::milliseconds(-1);
-                        #if DEBUG
-                        std::cout << " skipped" << std::endl;
-                        #endif
-                        continue;
-                    }
+
+                    //// if quicksort and is reverse or ordered skip
+                    //if (algorithm == 4 && ordering != 0) {
+                    //    elapsed_times.at(algorithm).at(arr_size).at(ordering).at(sample) = std::chrono::milliseconds(-1);
+                    //    #if DEBUG
+                    //    std::cout << " skipped" << std::endl;
+                    //    #endif
+                    //    continue;
+                    //}
 
                     // deep copy the array
-                    arrays[sample].clear();
+                    arrays.at(sample).clear();
+                    arrays.at(sample).reserve(size);
                     for (uint64_t i = 0; i < size; i++) {
-                        arrays[sample].push_back(src_arrays[sample][i]);
+                        arrays.at(sample).push_back(src_arrays.at(sample).at(i));
                     }
 
                     auto start = std::chrono::high_resolution_clock::now();
@@ -129,8 +144,14 @@ int main(void) {
                     elapsed_times[algorithm][arr_size][ordering][sample] = duration;
 
                     #if VERIFY
-                    if (!verify_sorted(arrays[sample])) {
+                    if (!verify_sorted(arrays.at(sample))) {
                         std::cout << "Array not sorted! " << algorithm_names[algorithm] << std::endl;
+                        if (arrays.at(sample).size() <= 100) {
+                            std::cout << std::endl;
+                            for (size_t i = 0; i < size; i++) {
+                                std::cout << arrays.at(sample).at(i) << " ";
+                            }
+                        }
                     }
                     #endif
 
@@ -147,7 +168,7 @@ int main(void) {
 
     for (int algorithm = 0; algorithm < NUMBER_OF_ALGORITHMS; algorithm++) {
         std::cout << "Algorithm: " << algorithm_names[algorithm] << std::endl << std::endl;
-        for (int arr_size = 0; arr_size < ARRAY_NUMBER_OF_SIZES; arr_size++) {
+        for (size_t arr_size = 0; arr_size < ARRAY_NUMBER_OF_SIZES; arr_size++) {
             std::cout << "Array size: " << array_sizes[arr_size] << std::endl;
             for (int ordering = 0; ordering < NUMBER_OF_ORDERINGS; ordering++) {
                 std::cout << generation_names[ordering] << ": ";
@@ -171,7 +192,7 @@ int main(void) {
     }
 
     // print best times for each time highlight the best of each group
-    for (int arr_size = 0; arr_size < ARRAY_NUMBER_OF_SIZES; arr_size++) {
+    for (size_t arr_size = 0; arr_size < ARRAY_NUMBER_OF_SIZES; arr_size++) {
         std::cout << "Array size: " << array_sizes[arr_size] << std::endl;
         for (int ordering = 0; ordering < NUMBER_OF_ORDERINGS; ordering++) {
             std::cout << "  " << generation_names[ordering] << ": ";

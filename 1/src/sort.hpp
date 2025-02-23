@@ -15,6 +15,7 @@ class Sort {
     private:
         static void private_quick_sort(std::vector<int64_t>& A, const size_t low, const size_t high);
         static size_t HoarePartition(std::vector<int64_t>& A, const size_t low, const size_t high);
+        static size_t LomutoPartition(std::vector<int64_t>& A, const size_t low, const size_t high);
         static void merge(const std::vector<int64_t>& B, const std::vector<int64_t>& C, std::vector<int64_t>& A);
 };
 
