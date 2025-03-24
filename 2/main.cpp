@@ -18,8 +18,10 @@ void translate_to_morse(char *dest, char *src) {
     // '/' delim between letters
     uint64_t index = 0;
 
+    // parse until the end of the line
     while (*src != '\0') {
 
+        // parse each word
         while (*src != ' ') {
 
             if (*src == '\0') {
@@ -29,6 +31,8 @@ void translate_to_morse(char *dest, char *src) {
 
             }
 
+            // put into the dest buffer the value represented by a char
+            // preceded by a / to delimit each letter
             *dest = '/';
             ++dest;
             char *morse = get_morse_code(*src);
@@ -39,6 +43,7 @@ void translate_to_morse(char *dest, char *src) {
 
         }
 
+        // ' ' to delimit a word
         ++src;
         *dest = ' ';
         ++dest;
@@ -58,10 +63,10 @@ void translate_to_morse(char *dest, char *src) {
  */
 void translate_morse_to_plain(tree_t *tree, char *dest, char *src) {
 
-    uint64_t index = 0;
-
+    // parse the line to the end
     while (*src != '\0') {
 
+        // replicate the space
         if (*src == ' ') {
 
             *dest = ' ';
@@ -69,6 +74,7 @@ void translate_morse_to_plain(tree_t *tree, char *dest, char *src) {
             ++src;
             ++dest;
 
+        // parse each letter from / to /
         } else if (*src == '/') {
 
             ++src;
@@ -125,6 +131,7 @@ char **get_lines(uint64_t *line_count, uint64_t max_lines, uint64_t max_line_siz
 
     }
 
+    // read lines till null
     while (fgets(lines[(*line_count)], max_line_size, file) != NULL) {
 
         ++(*line_count);
@@ -166,6 +173,7 @@ void populate_structs(tree_t *tree, const char *filename) {
     char c;
     char buf[5];
 
+    // for ever line
     for (uint64_t line_index = 0; line_index < line_count; line_index++) {
 
         c = lines[line_index][0];
@@ -242,10 +250,5 @@ int main(void) {
         demonstrate_encode_decode(tree, buf);
 
     }
-
-
-
-
-
 
 }

@@ -23,6 +23,7 @@ void insert_morse_code(char c, const char *morse_code) {
     
     if (c >= 97 && c <= 122) {
 
+        // copy the morse to the lookup table
         memcpy(&morse_code_lookup_table[5 * (c - 'a')], morse_code, strlen(morse_code) + 1);
 
 
@@ -54,6 +55,7 @@ char *get_morse_code(char c) {
     
     if (c >= 97 && c <= 122) {
 
+        // return the table location
         return &morse_code_lookup_table[5 * (c - 'a')];
 
 

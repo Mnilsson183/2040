@@ -50,7 +50,7 @@ bin_node_t *build_node() {
 
 	if (bin_node == NULL) {
 
-		std::cout << "Error mallocing memory\n";
+		printf("Error mallocing memory\n");
 		return NULL;
 
 	}
@@ -155,7 +155,9 @@ tree_t *make_tree() {
  * @param tree Pointer to the tree object
  */
 void free_tree(tree_t* tree) {
+
 	free_sub_tree(&tree->head);
+
 }
 
 /**
