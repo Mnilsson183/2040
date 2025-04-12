@@ -1,0 +1,29 @@
+From the results we may observe that there is a slight improvement in the code where a 
+priority queue is used. I personally believe that the data used is not significant enough
+to come to a conclusion. Even on my Larger_test1.txt file that is significantly larger than
+the given test files it is difficult to come to a conclusion. There are too many confounding 
+variables(startup times, cpu scheduler) to display the theoretical improvement of the priority 
+queue. If we were to test this code on a larger data set we would see the efficiency of the 
+priority queue to be O(log V) as compared to the original O(V^2). Both of these algorithms
+both have the same accuracy and will return the same results.
+
+Tested on the original test files
++---------------------------+-------------------------+-----------------------+
+|       Test/File & Type    |    Original Code (s)    |   Priority Queue (s)  |
++---------------------------+-------------------------+-----------------------+
+| Dijkstra_test1 (List)     |     1.1622e-05         |     1.7682e-05         |
+| Dijkstra_test2 (List)     |     1.2748e-05         |     1.7758e-05         |
+| Dijkstra_test3 (List)     |     3.0767e-05         |     3.4427e-05         |
++---------------------------+-------------------------+-----------------------+
+| Dijkstra_test1 (Matrix)   |     1.4659e-05         |     1.2769e-05         |
+| Dijkstra_test2 (Matrix)   |     1.3092e-05         |     1.2063e-05         |
+| Dijkstra_test3 (Matrix)   |     2.4455e-05         |     1.5453e-05         |
++---------------------------+-------------------------+-----------------------+
+
+Tested on the Larger_test1.txt file
++-------------------------------+------------------------+
+| Implementation (List)         | Execution Time (s)     |
++-------------------------------+------------------------+
+| Priority Queue Implementation |     0.000845937        |
+| Original Dijkstra             |     0.00100736         |
++-------------------------------+------------------------+
